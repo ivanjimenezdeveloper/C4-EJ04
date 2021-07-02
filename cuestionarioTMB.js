@@ -33,6 +33,7 @@ const tipoTransporte = async () =>{
 
   if(respuesta.tipo === "bus"){
     console.log(chalk.yellow("No tenemos información disponible sobre los buses https://www.tmb.cat/es/home"));
+    process.exit(0)
   }
 }
 )();
