@@ -28,11 +28,27 @@ const existeLinea = async (lineaRespuesta) => {
   const linea = await comprobarLinea(lineaRespuesta, lineas);
 
   if (!linea) {
-    return -1;
+    return false;
   }
-  return linea;
+  return linea.properties.CODI_LINEA;
+};
+const datosLinea = async (lineaRespuesta) => {
+  const lineas = await getLineasMetro();
+  const linea = await comprobarLinea(lineaRespuesta, lineas);
+  if (!linea) {
+    return false;
+  }
+  const codigoLinea = { ...linea[0] };
+
+  const respuesta = await fetch(
+    `https://api.tmb.cat/v1/transit/linies/metro/${codigoLinea.properties.CODI_LINIA}/estacions?app_id=${apiId}&app_key=${apiKey}`
+  );
+  const json = await respuesta.json();
+
+  return json.features;
 };
 
 exports = {
   existeLinea,
+  datosLinea,
 };
