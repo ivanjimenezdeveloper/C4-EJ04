@@ -18,10 +18,23 @@ const tipoTransporte = async () =>{
         }
       ]
     },
-    // {
-    //   console.log(`No tenemos información disponible sobre los buses ${https://www.tmb.cat/es/home}´));
-    //   when:(respuestas)=> respuestas.tipo==="bus";
-    // }
+    {
+
+      when:(respuestas)=> respuestas.tipo==="metro",
+
+        value: "informacion extra",
+        name: "informacionExtra",
+        type: "checkbox"
+        message: "¿Qué información extra quiere obtener de cada parada?",
+        choices: [
+          {
+
+          }
+        ]
+
+
+
+    }
 
   ])
   return (respuesta);
