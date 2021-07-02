@@ -30,7 +30,7 @@ const existeLinea = async (lineaRespuesta) => {
   if (!linea) {
     return -1;
   }
-  console.log(linea);
+  return linea;
 };
 
 exports = {
