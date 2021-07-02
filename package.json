@@ -28,6 +28,7 @@
     "node-fetch": "^2.6.1"
     "chalk": "^4.1.1",
     "eslint-config-prettier": "^8.3.0",
-    "inquirer": "^8.1.1"
+    "inquirer": "^8.1.1",
+    "inquirer-checkbox-status": "^1.0.0"
   }
 }
