@@ -1,5 +1,5 @@
 const inquirer= require ("inquirer");
-
+const chalk = require("chalk");
 // Tipo de transporte
 const tipoTransporte = async () =>{
   const respuesta = await inquirer.prompt([
@@ -17,13 +17,22 @@ const tipoTransporte = async () =>{
           name: "metro",
         }
       ]
-    }
+    },
+    // {
+    //   console.log(`No tenemos información disponible sobre los buses ${https://www.tmb.cat/es/home}´));
+    //   when:(respuestas)=> respuestas.tipo==="bus";
+    // }
 
   ])
   return (respuesta);
 }
 
 (async () => {
-  console.log(await tipoTransporte());
-})();
+  const respuesta = await tipoTransporte();
+  console.log(respuesta);
 
+  if(respuesta.tipo === "bus"){
+    console.log(chalk.yellow("No tenemos información disponible sobre los buses https://www.tmb.cat/es/home"));
+  }
+}
+)();
