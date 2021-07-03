@@ -15,13 +15,19 @@ const crearMensaje = (remitente, cuerpo) => {
     to: remitente,
     subject: "Paradas solicitadas",
     html: cuerpo,
+    attachments: [
+      {
+        filename: "paradas.txt",
+        path: "./adjunto/paradas.txt",
+      },
+    ],
   };
 
   return mensaje;
 };
 
-const enviarEmail = (correo, paradas) => {
-  const mensaje = crearMensaje(correo, JSON.stringify(paradas));
+const enviarEmail = (correo) => {
+  const mensaje = crearMensaje(correo, "Toma tus paradas maestro");
 
   transport.sendMail(mensaje, (err, info) => {
     if (err) {
@@ -31,6 +37,8 @@ const enviarEmail = (correo, paradas) => {
     }
   });
 };
+
+enviarEmail("info@gmail.com");
 
 exports = {
   enviarEmail,
