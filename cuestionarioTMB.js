@@ -10,35 +10,57 @@ const tipoTransporte = async () =>{
       choices: [
         {
           value: "bus",
-          name: "bus",
+          name: "Bus",
         },
         {
           value: "metro",
-          name: "metro",
+          name: "Metro",
         }
       ]
     },
     {
-
-      when:(respuestas)=> respuestas.tipo==="metro",
-
         value: "informacion extra",
         name: "informacionExtra",
-        type: "checkbox"
+        type: "checkbox",
         message: "¿Qué información extra quiere obtener de cada parada?",
+        when:(respuestas)=> respuestas.tipo==="metro",
         choices: [
+
           {
-
+            value:"coordenadas",
+            name:"Coordenadas",
           }
+          ,
+          {
+            value:"FechaDeInauguracion",
+            name:"Fecha de Inauguración",
+          }
+
         ]
+    },
+        {
+           name: "errores",
+           type: "confirm",
+           message:"¿Quiere que le informemos de los errores?",
+           when:(respuestas)=> respuestas.tipo==="metro",
+        },
+        {
+          name: "consultaLinea",
+          type: "input",
+          message:"¿Qué línea quiere consultar?",
+          when:(respuestas)=> respuestas.tipo==="metro",
+
+        },
 
 
 
-    }
+      ])
 
-  ])
-  return (respuesta);
-}
+
+          return (respuesta);
+
+
+  }
 
 (async () => {
   const respuesta = await tipoTransporte();
@@ -48,5 +70,7 @@ const tipoTransporte = async () =>{
     console.log(chalk.yellow("No tenemos información disponible sobre los buses https://www.tmb.cat/es/home"));
     process.exit(0)
   }
+
+
 }
 )();
