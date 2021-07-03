@@ -1,7 +1,9 @@
 const { program } = require("commander");
 
-program.option("-c, --color <nombre>", "Especifica un nombre");
+(async () => {
+  program.option("-c, --color <color>", "Especifica un color en hexadecimal");
+  program.option("-a, --abrev ", "da los datos abreviados");
+  program.parse(process.argv);
 
-program.parse(process.argv);
-
-const { nombre } = program.opts();
+  const { color, abrev } = program.opts();
+})();
