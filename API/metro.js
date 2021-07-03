@@ -48,7 +48,45 @@ const datosLinea = async (lineaRespuesta) => {
   return json.features;
 };
 
+const getNombreParadas = (
+  paradasLinea,
+  { abrev, coordenadas, fechaInaguracion }
+) =>
+  paradasLinea.map((parada) => {
+    const paradaToReturn = {};
+
+    if (abrev) {
+      paradaToReturn.NOM_ESTACIO = parada.properties.NOM_ESTACIO.substring(
+        0,
+        3
+      );
+    } else {
+      paradaToReturn.NOM_ESTACIO = parada.properties.NOM_ESTACIO;
+    }
+
+    if (coordenadas) {
+      paradaToReturn.coordinates = parada.geometry.coordinates;
+    }
+
+    if (fechaInaguracion) {
+      paradaToReturn.DATA_INAUGURACIO = parada.properties.DATA_INAUGURACIO;
+    }
+
+    return paradaToReturn;
+  });
+
+// Ejemplo de datos de paradas
+// (async () => {
+//   const nombreParadas = getNombreParadas(await datosLinea("L10S"), {
+//     abrev: false,
+//     coordenadas: true,
+//     fechaInaguracion: false,
+//   });
+//   console.log(nombreParadas);
+// })();
+
 exports = {
   existeLinea,
   datosLinea,
+  getNombreParadas,
 };
