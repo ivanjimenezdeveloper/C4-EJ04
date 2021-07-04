@@ -48,7 +48,7 @@ const datosLinea = async (lineaRespuesta) => {
   return json.features;
 };
 
-const getNombreParadas = (
+const getInfoParadas = (
   paradasLinea,
   { abrev, coordenadas, fechaInaguracion }
 ) =>
@@ -80,5 +80,5 @@ const getNombreParadas = (
 exports = {
   existeLinea,
   datosLinea,
-  getNombreParadas,
+  getInfoParadas,
 };
