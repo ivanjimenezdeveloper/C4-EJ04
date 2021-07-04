@@ -38,8 +38,6 @@ const enviarEmail = (correo) => {
   });
 };
 
-enviarEmail("info@gmail.com");
-
 exports = {
   enviarEmail,
 };
