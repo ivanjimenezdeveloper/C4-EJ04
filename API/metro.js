@@ -41,7 +41,7 @@ const datosLinea = async (lineaRespuesta) => {
   const codigoLinea = { ...linea[0] };
 
   const respuesta = await fetch(
-    `https://api.tmb.cat/v1/transit/linies/metro/${codigoLinea.properties.CODI_LINIA}/estacions?app_id=${apiId}&app_key=${apiKey}`
+    `${urlMetro}/${codigoLinea.properties.CODI_LINIA}/estacions?app_id=${apiId}&app_key=${apiKey}`
   );
   const json = await respuesta.json();
 
@@ -55,22 +55,14 @@ const getNombreParadas = (
   paradasLinea.map((parada) => {
     const paradaToReturn = {};
 
-    if (abrev) {
-      paradaToReturn.NOM_ESTACIO = parada.properties.NOM_ESTACIO.substring(
-        0,
-        3
-      );
-    } else {
-      paradaToReturn.NOM_ESTACIO = parada.properties.NOM_ESTACIO;
-    }
+    paradaToReturn.NOM_ESTACIO = abrev
+      ? parada.properties.NOM_ESTACIO.substring(0, 3)
+      : parada.properties.NOM_ESTACIO;
 
-    if (coordenadas) {
-      paradaToReturn.coordinates = parada.geometry.coordinates;
-    }
+    if (coordenadas) paradaToReturn.coordinates = parada.geometry.coordinates;
 
-    if (fechaInaguracion) {
+    if (fechaInaguracion)
       paradaToReturn.DATA_INAUGURACIO = parada.properties.DATA_INAUGURACIO;
-    }
 
     return paradaToReturn;
   });
@@ -80,7 +72,7 @@ const getNombreParadas = (
 //   const nombreParadas = getNombreParadas(await datosLinea("L10S"), {
 //     abrev: false,
 //     coordenadas: true,
-//     fechaInaguracion: false,
+//     fechaInaguracion: true,
 //   });
 //   console.log(nombreParadas);
 // })();
